@@ -13,12 +13,16 @@ main {
   height: 3.5rem;
   background-color: #00695c;;
   padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .main-header__nav {
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .main-header__item-list {
@@ -172,4 +176,12 @@ button:hover,
 button:active {
   background-color: #00695c;
   color: white;
+}
+
+
+.login-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
 }
