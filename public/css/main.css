@@ -188,3 +188,18 @@ button:active {
   margin: auto;
   display: block;
 }
+
+.user-message {
+  margin: auto;
+  width: 90%;
+  border: 1px solid #4771fa;
+  padding: 1rem;
+  border-radius: 3px;
+  background: #8ea8fd;
+  text-align: center;
+}
+
+.user-message--error {
+  border-color: red;
+  background: rgb(227, 180, 180);
+}
