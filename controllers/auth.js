@@ -17,9 +17,16 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.getSignup = (req, res, next) => {
+  let message = req.flash("Error");
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
   res.render("auth/signup", {
     path: "/signup",
     pageTitle: "Signup",
+    errorMessage: message,
   });
 };
 
@@ -40,10 +47,10 @@ exports.postLogin = (req, res, next) => {
             req.session.isLoggedIn = true;
             req.session.user = user;
             return req.session.save((error) => {
-              console.log("error", error);
               res.redirect("/");
             });
           }
+          req.flash("Error", "Invalid email or password.");
           console.log("Wrong password");
           res.redirect("/login");
         })
@@ -60,6 +67,7 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: email })
     .then((userDoc) => {
       if (userDoc) {
+        req.flash("Error", "E-Mail exists already. Please choose another one.");
         console.log("User already exists");
         return res.redirect("/signup");
       }
@@ -74,7 +82,7 @@ exports.postSignup = (req, res, next) => {
           return user.save();
         })
         .then((result) => {
-          console.log("User created!", result);
+          console.log("User created!");
           res.redirect("/");
         });
     })
