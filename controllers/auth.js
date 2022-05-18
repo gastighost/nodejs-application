@@ -29,7 +29,27 @@ exports.postLogin = (req, res, next) => {
     .catch((error) => console.log(error));
 };
 
-exports.postSignup = (req, res, next) => {};
+exports.postSignup = (req, res, next) => {
+  const { email, password, confirmPassword } = req.body;
+  User.findOne({ email: email })
+    .then((userDoc) => {
+      if (userDoc) {
+        console.log("User already exists");
+        return res.redirect("/signup");
+      }
+      const user = new User({
+        email: email,
+        password: password,
+        cart: { items: [] },
+      });
+      return user.save();
+    })
+    .then((result) => {
+      console.log("User created!", result);
+      res.redirect("/");
+    })
+    .catch((error) => console.log(error));
+};
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy((error) => {
