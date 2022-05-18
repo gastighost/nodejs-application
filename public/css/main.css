@@ -164,6 +164,9 @@ main {
 }
 
 button {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
   font: inherit;
   border: 1px solid #00695c;
   color: #00695c;
@@ -184,4 +187,19 @@ button:active {
   max-width: 90%;
   margin: auto;
   display: block;
+}
+
+.user-message {
+  margin: auto;
+  width: 90%;
+  border: 1px solid #4771fa;
+  padding: 1rem;
+  border-radius: 3px;
+  background: #8ea8fd;
+  text-align: center;
+}
+
+.user-message--error {
+  border-color: red;
+  background: rgb(227, 180, 180);
 }
