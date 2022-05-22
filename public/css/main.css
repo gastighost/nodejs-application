@@ -203,3 +203,7 @@ button:active {
   border-color: red;
   background: rgb(227, 180, 180);
 }
+
+.form-control input.invalid {
+  border-color: red;
+}
