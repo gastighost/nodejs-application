@@ -56,6 +56,7 @@ exports.postAddProduct = (req, res, next) => {
     title: title,
     price: price,
     description: description,
+    imageUrl: path.toString(),
     userId: req.user,
   });
   product
