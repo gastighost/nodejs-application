@@ -1,4 +1,5 @@
 const { validationResult } = require("express-validator");
+const fileHelper = require("../util/file");
 
 const Product = require("../models/product");
 
