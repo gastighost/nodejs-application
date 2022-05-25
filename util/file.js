@@ -8,4 +8,4 @@ function deleteFile(filePath) {
   });
 }
 
-module.exports = deleteFile;
+exports.deleteFile = deleteFile;
