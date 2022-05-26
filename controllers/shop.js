@@ -2,6 +2,9 @@ const Product = require("../models/product");
 const Order = require("../models/order");
 const fs = require("fs");
 const path = require("path");
+const stripe = require("stripe")(
+  "sk_test_51L3c2XEzlZIjiaV2Ufnk5NieSGYvgzuhsHFvtN6YUcaGtSMyCXgSpoTb3jEaCh6NTgVIzfdPwDsxhJM5SZvv6qGu00c1StN2KE"
+);
 
 const PDFDocument = require("pdfkit");
 
@@ -165,6 +168,32 @@ exports.postCartDeleteProduct = (req, res, next) => {
     .removeFromCart(productId)
     .then((result) => {
       res.redirect("/cart");
+    })
+    .catch((err) => {
+      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+exports.getCheckout = (req, res, next) => {
+  let products;
+  let total = 0;
+  req.user
+    .populate("cart.items.productId")
+    .then((user) => {
+      const products = user.cart.items;
+      let total = 0;
+      products.forEach((p) => {
+        total += p.quantity * p.productId.price;
+      });
+      res.render("shop/checkout", {
+        path: "/checkout",
+        pageTitle: "Checkout",
+        products: products,
+        totalSum: total,
+      });
     })
     .catch((err) => {
       console.log(err);
