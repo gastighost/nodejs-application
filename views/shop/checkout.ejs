@@ -23,7 +23,7 @@
             var orderButton = document.getElementById('order-button');
             orderButton.addEventListener("click", function(){
               stripe.redirectToCheckout({
-                sessionId: ''
+                sessionId: '<%= sessionId %>'
               })
             })
           </script>
